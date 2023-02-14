@@ -54,6 +54,7 @@ public class ApiController {
                             .queryParam("videoCategoryId", youTubeDTO.getVideoCategoryId())
                             .queryParam("q", youTubeDTO.getQ())
                             .queryParam("type", youTubeDTO.getType())
+                            .queryParam("pageToken", youTubeDTO.getPageToken())
                             .queryParam("key", YOUTUBE_KEY)
                             .build())
                     .retrieve().toEntity(String.class).block();
