@@ -59,9 +59,6 @@ public class ApiController {
                             .build())
                     .retrieve().toEntity(String.class).block();
 
-            log.info("유튜브 데이터 가져오기 성공");
-            log.info("status : {}", response.getStatusCode());
-
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
             log.error("유튜브 데이터 가져오기 실패");
@@ -93,9 +90,6 @@ public class ApiController {
                                 httpHeaders.set("X-Naver-Client-Secret", NAVER_PW);
                             })
                     .retrieve().toEntity(String.class).block();
-
-            log.info("뉴스 데이터 가자오기 성공");
-            log.info("status : {}", response.getStatusCode());
 
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
@@ -129,10 +123,6 @@ public class ApiController {
                             .build())
                     .retrieve().toEntity(String.class).block();
 
-
-            log.info("유기동물 데이터 가져오기 성공");
-            log.info("status : {}", response.getStatusCode());
-
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
             log.error("유기동물 테이터 가져오기 실패");
@@ -158,10 +148,6 @@ public class ApiController {
                             .build())
                     .retrieve().toEntity(String.class).block();
 
-
-            log.info("유기동물 시도 가져오기 성공");
-            log.info("status : {}", response.getStatusCode());
-
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
             log.error("유기동물 시도 가져오기 실패");
@@ -186,10 +172,6 @@ public class ApiController {
                             .queryParam("serviceKey", ANIMAL_KEY)
                             .build())
                     .retrieve().toEntity(String.class).block();
-
-
-            log.info("유기동물 시군구 가져오기 성공");
-            log.info("status : {}", response.getStatusCode());
 
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
