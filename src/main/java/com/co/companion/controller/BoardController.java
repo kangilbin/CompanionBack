@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.Optional;
+
 
 @Slf4j
 @RestController
@@ -21,7 +23,7 @@ public class BoardController {
     private BoardService service;
 
     @PostMapping("community/write")
-    public ResponseEntity<?> community(@RequestBody BoardDTO dto) {
+    public ResponseEntity<?> communityWrite(@RequestBody BoardDTO dto) {
         try {
             log.info(dto.toString());
             BoardEntity entity = BoardDTO.toEntity(dto);
@@ -36,13 +38,15 @@ public class BoardController {
 
 
     @GetMapping("community/list")
-    public ResponseEntity<?> community(@RequestParam(required = false) int page) {
-        try {
-            log.info("page : " + page);
-            return ResponseEntity.ok().body(service.paging(page));
-        } catch (HttpClientErrorException e) {
-            log.error("커뮤니티 글쓰기 실패");
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<?> communityList(@RequestParam(required = false) int page, @RequestParam(required = false) String keyword, @RequestParam(required = false) String sort) {
+        return ResponseEntity.ok().body(service.paging(page, keyword, sort));
     }
+
+    @GetMapping("community/read/{id}")
+    public ResponseEntity<?> communityRead(@PathVariable(required = false) String id){
+        Optional<BoardEntity> board = service.boardSelect(id);
+        return ResponseEntity.ok().body(board);
+    }
+
+
 }

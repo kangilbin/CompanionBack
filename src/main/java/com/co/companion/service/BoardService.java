@@ -1,13 +1,19 @@
 package com.co.companion.service;
 
+import com.co.companion.dto.BoardDTO;
 import com.co.companion.model.BoardEntity;
 import com.co.companion.persistence.BoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -21,8 +27,19 @@ public class BoardService {
         boardRepository.save(entity);
     }
 
-    public List<Map> paging (final int page) {
-        return boardRepository.findPageList(page);
+    // 게시글 select
+    public  Optional<BoardEntity> boardSelect(final String id) {
+        return boardRepository.findById(id);
+    }
+
+
+
+
+    // 페이징
+    public Page<Map> paging (final int page, final String keyword, final String sort) {
+        Pageable pageable = PageRequest.of(page,10,  Sort.Direction.DESC, sort);
+
+        return  boardRepository.findPageList(keyword, pageable);
     }
 
     // 검증
