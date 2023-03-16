@@ -78,7 +78,7 @@ public class BatchConfig {
                             .user_id("관리자")
                             .title(title)
                             .content(ctt)
-                            .dom("<img src='"+img+"' ><br />" + ctt)
+                            .dom("<img src='"+img+"' ><br /><pre>" + ctt + "</pre>")
                             .img("['"+img+"']")
                             .build();
 
