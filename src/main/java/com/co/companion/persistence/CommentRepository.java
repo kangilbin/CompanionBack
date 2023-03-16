@@ -22,7 +22,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, String> 
             "where board_id =?1\n" +
             "order by parent_comment_id, comment_id"
             ,nativeQuery = true)
-    List<Map> findByBoardId(String boardId);
+    List<Map> findByBoardId(@Param("boardId") String boardId);
 
     @Transactional
     @Modifying

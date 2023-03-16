@@ -2,7 +2,6 @@ package com.co.companion.controller;
 
 
 import com.co.companion.dto.BoardDTO;
-import com.co.companion.dto.ResponseDTO;
 import com.co.companion.model.BoardEntity;
 import com.co.companion.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
