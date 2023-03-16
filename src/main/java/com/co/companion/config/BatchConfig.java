@@ -79,6 +79,7 @@ public class BatchConfig {
                             .title(title)
                             .content(ctt)
                             .dom("<img src='"+img+"' ><br />" + ctt)
+                            .img("['"+img+"']")
                             .build();
 
                     boardAIService.create(entity);
