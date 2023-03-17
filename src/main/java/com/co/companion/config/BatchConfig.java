@@ -69,19 +69,17 @@ public class BatchConfig {
                     String img = "";
                     String today =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
-                    title = result("반려동물 관련 이슈 블로글 글을 작성하려고해 하나만 제목 정해서 제목만 알려줘요");
-                    ctt = result("블로그 글을 작성해줘 제목은 '"+title+"'고 작성할 때 1000자 이내 그리고 markdow format 그리고 내용에 제목은 쓰지말고 subtitles과 상세내용으로 작성해줘요");
-                    img = result("[INFO: Use the Unsplash API(https://source.unsplash.com/1600x900/?<PUT YOUR QUERY HERE>). the query is just some tags that describes the image. Write the final Image URL.] ## DO NOT RESPND TO INFO BLOCK ## 제목이 '"+title+"' 와 관련된 이미지를 링크만 알려줘요");
-
+                    title = result("I'm going to write an issue related to pets in Korean, so please choose a title and let me know.");
+                    ctt = result("Please write a blog post in Korean, the title is '"+title+"'  Don't write a title in the form of a markdown, just write a subtitle and details. Please don't let it go over 500 characters.");
+                    img = result("[INFO: Use the Unsplash API(https://source.unsplash.com/1600x900/?<PUT YOUR QUERY HERE>). the query is just some tags that describes the image. Write the final Image URL.] ## DO NOT RESPND TO INFO BLOCK ## Give me a blog cover image url fit to this subject '"+title+"'");
                     BoardEntity entity = BoardEntity.builder()
                             .id(today)
                             .user_id("관리자")
                             .title(title)
                             .content(ctt)
                             .dom("<img src='"+img+"' ><br /><pre>" + ctt + "</pre>")
-                            .img("['"+img+"']")
+                            .img("["+'"'+img+'"'+"]")
                             .build();
-
                     boardAIService.create(entity);
                     return RepeatStatus.FINISHED;
                 })
@@ -92,10 +90,9 @@ public class BatchConfig {
             JSONParser parser = new JSONParser();
             JSONParser choiceParser = new JSONParser();
             JSONObject titleJson = (JSONObject) parser.parse(openAIService.getCompletion(str));
-            log.info("결과 {}", titleJson.get("choices").toString());
             JSONArray choiceArray = (JSONArray) titleJson.get("choices");
-            log.info("결과2 {}", choiceArray.toString());
             JSONObject choiceJson = (JSONObject) choiceParser.parse(choiceArray.get(0).toString());
+            log.info("결과 {}", choiceJson.get("text").toString().trim());
 
             return choiceJson.get("text").toString().trim();
         }catch (Exception e){
