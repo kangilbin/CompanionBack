@@ -47,6 +47,9 @@ public class UserEntity {
     @Column(name = "zip_no")
     private String zip_no;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "reg_time")
     private Date reg_time;
 

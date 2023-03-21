@@ -37,6 +37,7 @@ public class UserController {
                     .id(user.get().getId())
                     .user_name(user.get().getUser_name())
                     .nickname(user.get().getNickname())
+                    .phone(user.get().getPhone())
                     .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUserDTO);

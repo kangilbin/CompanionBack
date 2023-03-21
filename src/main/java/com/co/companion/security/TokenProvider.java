@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -26,20 +27,26 @@ public class TokenProvider {
 
 
         // JWT Token 생성
-        return Jwts.builder()
+            return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .claim("id", userEntity.getId())
+                .claim("user_name", userEntity.getUser_name())
+                .claim("nickname", userEntity.getNickname())
+                .claim("phone", userEntity.getPhone())
+                .claim("role", userEntity.getRole())
                 .setSubject(userEntity.getId()) // sub
                 .setIssuedAt(new Date())		// iat
                 .setExpiration(expiryDate)		// exp
                 .compact();
     }
 
-    public String validateAndGetUserId(String token) {
-        Claims claims = Jwts.parser()
+    /**
+     * 토큰의 Claim 디코딩
+     */
+    public Claims getAllClaims(String token) {
+        return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
-
-        return claims.getSubject();
     }
 }

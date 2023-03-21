@@ -29,8 +29,8 @@ public class UserService {
 
     public Optional<UserEntity> getByCredentials(final String id, final String password, final PasswordEncoder encoder) {
         final Optional<UserEntity> user = repository.findById(id);
-        if(user != null && encoder.matches(password, user.get().getPassword())) {
-            return user;
+        if(user.isPresent()) {
+            if(encoder.matches(password, user.get().getPassword())) return user;
         }
         return null;
     }

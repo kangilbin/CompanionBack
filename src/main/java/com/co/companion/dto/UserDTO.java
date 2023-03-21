@@ -21,9 +21,11 @@ public class UserDTO {
     private String addr;
     private String addr_detail;
     private String zip_no;
+    private String role;
     private Date mod_time;
     private Date del_time;
     private String token;
+
 
     public UserDTO(final UserEntity entity) {
         this.id = entity.getId();
@@ -34,6 +36,7 @@ public class UserDTO {
         this.addr = entity.getAddr();
         this.addr_detail = entity.getAddr_detail();
         this.zip_no = entity.getZip_no();
+        this.role = entity.getRole();
         this.mod_time = entity.getMod_time();
         this.del_time = entity.getDel_time();
     }
@@ -48,6 +51,7 @@ public class UserDTO {
                 .addr(dto.getAddr())
                 .addr_detail(dto.getAddr_detail())
                 .zip_no(dto.getZip_no())
+                .role(dto.getRole())
                 .mod_time(dto.getMod_time())
                 .del_time(dto.getDel_time())
                 .build();

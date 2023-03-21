@@ -3,10 +3,12 @@ package com.co.companion.controller;
 
 import com.co.companion.dto.BoardDTO;
 import com.co.companion.model.BoardEntity;
+import com.co.companion.security.CustomUserDetails;
 import com.co.companion.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -22,9 +24,9 @@ public class BoardController {
     private BoardService service;
 
     @PostMapping("community/write")
-    public ResponseEntity<?> communityWrite(@RequestBody BoardDTO dto) {
+    public ResponseEntity<?> communityWrite(@AuthenticationPrincipal CustomUserDetails user, @RequestBody BoardDTO dto) {
         try {
-            log.info(dto.toString());
+            dto.setUser_id(user.getNickname());
             BoardEntity entity = BoardDTO.toEntity(dto);
             service.create(entity);
 
