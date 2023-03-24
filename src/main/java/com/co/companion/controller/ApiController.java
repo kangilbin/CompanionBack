@@ -58,7 +58,6 @@ public class ApiController {
                             .queryParam("key", YOUTUBE_KEY)
                             .build())
                     .retrieve().toEntity(String.class).block();
-
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
             log.error("유튜브 데이터 가져오기 실패");
@@ -90,7 +89,6 @@ public class ApiController {
                                 httpHeaders.set("X-Naver-Client-Secret", NAVER_PW);
                             })
                     .retrieve().toEntity(String.class).block();
-
             return ResponseEntity.ok().body(response.getBody());
         } catch (HttpClientErrorException e) {
             log.error("뉴스 테이터 가져오기 실패");

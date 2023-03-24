@@ -29,6 +29,8 @@ public class BoardService {
 
     // 게시글 select
     public  Optional<BoardEntity> boardSelect(final String id) {
+        boardRepository.likesIncrease(id);
+
         return boardRepository.findById(id);
     }
 

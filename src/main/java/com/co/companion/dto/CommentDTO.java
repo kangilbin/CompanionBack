@@ -19,6 +19,7 @@ public class CommentDTO {
     private int comment_id;
     private String content;
     private String user_id;
+    private String nickname;
     private Date mod_time;
     private Date del_time;
 
@@ -28,6 +29,7 @@ public class CommentDTO {
         this.comment_id = entity.getComment_id();
         this.content = entity.getContent();
         this.user_id = entity.getUser_id();
+        this.nickname = entity.getNickname();
         this.mod_time = entity.getMod_time();
         this.del_time = entity.getDel_time();
     }
@@ -39,6 +41,7 @@ public class CommentDTO {
                 .comment_id(dto.getComment_id())
                 .content(dto.getContent())
                 .user_id(dto.getUser_id())
+                .nickname(dto.getNickname())
                 .mod_time(dto.getMod_time())
                 .del_time(dto.getDel_time())
                 .build();

@@ -2,6 +2,8 @@ package com.co.companion.controller;
 
 
 import com.co.companion.dto.BoardDTO;
+import com.co.companion.dto.CommentDTO;
+import com.co.companion.dto.ResponseDTO;
 import com.co.companion.model.BoardEntity;
 import com.co.companion.security.CustomUserDetails;
 import com.co.companion.service.BoardService;
@@ -45,8 +47,14 @@ public class BoardController {
 
     @GetMapping("community/read/{id}")
     public ResponseEntity<?> communityRead(@PathVariable(required = false) String id){
-        Optional<BoardEntity> board = service.boardSelect(id);
-        return ResponseEntity.ok().body(board);
+        try{
+            Optional<BoardEntity> board = service.boardSelect(id);
+            return ResponseEntity.ok().body(board);
+        } catch (HttpClientErrorException e) {
+            String error = e.getMessage();
+            ResponseDTO<BoardDTO> response = ResponseDTO.<BoardDTO>builder().error(error).build();
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
 

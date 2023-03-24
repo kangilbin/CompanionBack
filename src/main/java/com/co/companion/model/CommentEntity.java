@@ -38,6 +38,9 @@ public class CommentEntity {
     @Column(name = "user_id")
     private String user_id;
 
+    @Column(name = "nickname")
+    private String nickname;
+
     @Column(name = "del_yn")
     private char del_yn;
 

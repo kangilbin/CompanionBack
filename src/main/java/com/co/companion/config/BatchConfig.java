@@ -1,11 +1,8 @@
 package com.co.companion.config;
 
 import com.co.companion.model.BoardEntity;
-import com.co.companion.model.UserEntity;
 import com.co.companion.service.BoardService;
 import com.co.companion.service.OpenAIService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,22 +14,16 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Configuration
 @EnableBatchProcessing
 public class BatchConfig {
-
-    @Value("${OPEN_AI_KEY}")
-    private String OPEN_KEY;
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -40,9 +31,7 @@ public class BatchConfig {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-//    @Autowired
-//    private DocumentRepository documentRepository;
-//
+
     @Autowired
     private OpenAIService openAIService;
 
@@ -96,7 +85,6 @@ public class BatchConfig {
 
             return choiceJson.get("text").toString().trim();
         }catch (Exception e){
-            log.info("여기타나?");
             log.error(e.getMessage());
             return "";
         }

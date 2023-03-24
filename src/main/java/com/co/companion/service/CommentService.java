@@ -39,6 +39,13 @@ public class CommentService {
         return repository.findByBoardId(dto.getBoard_id());
     }
 
+
+    // 답글 insert
+    public List<Map> commentDelete(final CommentDTO dto) {
+        repository.deleteUpdate(dto);
+        return repository.findByBoardId(dto.getBoard_id());
+    }
+
     // 검증
     private void validate(final CommentEntity entity) {
         if(entity == null) {
