@@ -20,42 +20,51 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "employer")
-public class UserEntity {
+@Table(name = "SBOARD")
+public class SBoardEntity {
     @Id
     @Column(name = "id")
     private String id;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "user_id")
+    private String user_id;
 
-    @Column(name = "user_name")
-    private String user_name;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "nickname")
-    private String nickname;
+    @Column(name = "ctt")
+    private String ctt;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "img")
+    private String img;
+
+    @Column(name = "sido")
+    private String sido;
+
+    @Column(name = "sigungu")
+    private String sigungu;
+
+    @Column(name = "dong")
+    private String dong;
 
     @Column(name = "addr")
     private String addr;
 
-    @Column(name = "addr_detail")
-    private String addr_detail;
+    @Column(name = "date")
+    private String date;
 
-    @Column(name = "zip_no")
-    private String zip_no;
+    @Column(name = "latitude")
+    private String latitude;
 
-    @Column(name = "role")
-    private String role;
+    @Column(name = "longitude")
+    private String longitude;
 
     @Column(name = "reg_time")
     private Date reg_time;
 
     @Column(name = "mod_time")
     private Date mod_time;
-
-    @Column(name = "del_time")
-    private Date del_time;
 }

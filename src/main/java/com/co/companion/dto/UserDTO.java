@@ -17,7 +17,7 @@ public class UserDTO {
     private String password;
     private String user_name;
     private String nickname;
-    private int phone;
+    private String phone;
     private String addr;
     private String addr_detail;
     private String zip_no;

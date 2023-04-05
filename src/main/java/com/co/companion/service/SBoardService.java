@@ -1,9 +1,9 @@
 package com.co.companion.service;
 
-import com.co.companion.dto.BoardDTO;
 import com.co.companion.model.BoardEntity;
 import com.co.companion.model.SBoardEntity;
 import com.co.companion.persistence.BoardRepository;
+import com.co.companion.persistence.SBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,32 +18,31 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class BoardService {
-    @Autowired
-    private BoardRepository boardRepository;
+public class SBoardService {
 
-    // 커뮤니티 게시판 insert
-    public void create(final BoardEntity entity) {
+    @Autowired
+    private SBoardRepository repository;
+
+    // 찾습니다 게시판 insert
+    public void create(final SBoardEntity entity) {
         validate(entity);
-        boardRepository.save(entity);
+        repository.save(entity);
     }
 
     // 게시글 select
-    public  Optional<BoardEntity> boardSelect(final String id) {
-        boardRepository.likesIncrease(id);
-
-        return boardRepository.findById(id);
+    public  Optional<SBoardEntity> boardSelect(final String id) {
+        return repository.findById(id);
     }
 
     // 페이징
-    public Page<Map> paging (final int page, final String keyword, final String sort) {
-        Pageable pageable = PageRequest.of(page,10,  Sort.Direction.DESC, sort);
+    public List<Map> paging (final String keyword, final int page, final String type, final String start
+            , final String end, final String sido, final String sigungu) {
 
-        return  boardRepository.findPageList(keyword, pageable);
+        return  repository.findPageList(keyword, page, type, start, end, sido, sigungu);
     }
 
     // 검증
-    private void validate(final BoardEntity entity) {
+    private void validate(final SBoardEntity entity) {
         if(entity == null) {
             log.warn("Entity 없음.");
             throw new RuntimeException("Entity 없음");
